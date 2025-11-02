@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>juego de preguntas</title>
+    <link rel="stylesheet" href="pregunta.css">
+    <script src="pregunta.js" defer></script>
+</head>
+<body>
+    <header>
+        <div class="padre">
+            <p id="puntuacion">puntos:<span id="punto"></span></p>
+            <p id="pregunta"></p>
+            <div class="botones">
+                <div class="botom" id="botom1" onclick="mostrar(0)"></div>
+                <div class="botom" id="botom2" onclick="mostrar(1)"></div>
+                <div class="botom" id="botom3" onclick="mostrar(2)"></div>
+                <div class="botom" id="botom4" onclick="mostrar(3)"></div>
+            </div>
+        </div>
+        <div id="container" class="container">
+            <p>nivel de dificultad</p>
+            <button class="uno" onclick="elejir(0)">bajo</button>
+            <button class="dos" onclick="elejir(1)">medio</button>
+            <button class="tres" onclick="elejir(2)">alto</button>
+        </div>
+    </header>
+</body>
+</html>
