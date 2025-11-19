@@ -19,6 +19,7 @@ body{
     border-radius: 10px;  
     background-color: #fff;
     animation: mover 5s linear infinite alternate;  
+    
 }
 
 #puntuacion{
@@ -94,12 +95,12 @@ body{
     justify-content: center;
     flex-direction: column;
     gap: 20px;
-    background-color: black;
+    background-color: rgb(66, 236, 255);
 }
 .container button{
     width: 200px;
     height: 40px;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: poppins;
     border-radius: 10px;
     border-color: transparent;
     font-size: 1.1em;
@@ -107,7 +108,7 @@ body{
 }
 .container p{
     font-size: 2em;
-    font-family: 'Courier New', Courier, monospace;
+    font-family:poppins;
     text-align: center;
     color: #fff;
     margin-bottom: 10px;

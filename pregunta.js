@@ -200,6 +200,7 @@
             pregunta_completa = arreglo[i]
             let container = document.getElementById("container")
             container.classList.add("listo")
+         
             pregunta_aleatoria()
         }
 
@@ -259,6 +260,7 @@
                 botones[i].style.boxShadow = '0 0 10px red'
                 setTimeout(() => {
                     cambiar_color()
+                    pregunta_aleatoria()
                     error()
                 }, 1000);
             }
