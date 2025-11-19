@@ -213,17 +213,15 @@
         let puntos = document.getElementById("punto")
         let punto = 0
 
-        let nombre_jugador = prompt("primero que todo coloce su nombre , si llegas a 10 puntos ganas el test de programacion basica")
+       
 
         function pregunta_aleatoria(){
             let random = Math.floor(Math.random() * pregunta_completa.length)
             pregunta_lista = pregunta_completa[random]
 
-            if(nombre_jugador){
-                pregunta.textContent = `oye ${nombre_jugador} ${pregunta_lista.pregunta}`
-            }else{
-                pregunta.textContent = `oye fulano sin nombre ${pregunta_lista.pregunta}`
-            }
+            
+            pregunta.textContent = `oye ${pregunta_lista.pregunta}`
+           
 
             let arreglo_pregunta = [
                 pregunta_lista.respuesta,
@@ -248,7 +246,7 @@
 
         function mostrar(i){
             if(cambiar_pregunta[i] == pregunta_lista.respuesta){
-                botones[i].style.backgroundColor = "green"
+                botones[i].style.boxShadow = '0 0 10px green'
                 setTimeout(() => {
                     pregunta_aleatoria()
                     cambiar_color()
@@ -258,7 +256,7 @@
                 }, 1000);
                 punto ++
             }else{
-                botones[i].style.backgroundColor = "red"
+                botones[i].style.boxShadow = '0 0 10px red'
                 setTimeout(() => {
                     cambiar_color()
                     error()
@@ -268,27 +266,16 @@
         
         function cambiar_color(){
             botones.forEach(botom => {
-                botom.style.backgroundColor = "#fff"
+                botom.style.boxShadow = '0 0 10px #fff'
             })
         }
 
-        function error(){
-            if(nombre_jugador){
-                alert(`${nombre_jugador} perdiste :) , actualiza la pagina para jugar de nuevo`)
-
-            }else{
-                alert(`fulano sin nombre perdiste :) , actualiza la pagina para jugar de nuevo`)
-            }
+        function error(){     
+            alert(`lo siento perdiste :) , actualiza la pagina para jugar de nuevo`)
         }
 
         function ganador(){
-            if(nombre_jugador){
-                alert(`${nombre_jugador} has ganado el test de pregunta y tienes un conocimiento basico sobre la programacion`)
+                alert(`felicidades has ganado el test de pregunta y tienes un conocimiento basico sobre la programacion`)
                 punto = 0
-                puntos.textContent = 0
-            }else{
-                alert(`fulano has ganado el test de preguntas y tienes un conocimiento basico sobre la programacion`)
-                punto = 0
-                puntos.textContent = punto
-            }
+                puntos.textContent = 0          
         }
