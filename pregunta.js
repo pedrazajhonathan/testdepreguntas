@@ -226,6 +226,7 @@
         let respuestas_listas
         let pregunta_total
 
+
         function responder_pregunta(){
             let ramdon = Math.floor(Math.random() * pregunta_elejida.length)
             pregunta_total = pregunta_elejida[ramdon]
@@ -237,6 +238,17 @@
                 pregunta_total.respuesta_incorrecta1,
                 pregunta_total.respuesta_incorrecta2,
                 pregunta_total.respuesta_incorrecta3, 
+
+            ]
+            pregunta.textContent = `oye ${pregunta_lista.pregunta}`
+           
+
+            let arreglo_pregunta = [
+                pregunta_lista.respuesta,
+                pregunta_lista.respuesta_incorrecta1,
+                pregunta_lista.respuesta_incorrecta2,
+                pregunta_lista.respuesta_incorrecta3
+
             ]
 
             respuestas_listas = arreglo_de_respuestas.sort(() => Math.random() - 0.5)
@@ -252,8 +264,9 @@
         let arreglo_botom = [botom1,botom2,botom3,botom4]
 
         function mostrar(i){
-            if(respuestas_listas[i] == pregunta_total.respuesta){
-                arreglo_botom[i].style.backgroundColor = "green"
+            if(cambiar_pregunta[i] == pregunta_lista.respuesta){
+                botones[i].style.boxShadow = '0 0 10px green'
+
                 setTimeout(() => {
                     responder_pregunta()
                     cambiar_color()
@@ -263,26 +276,29 @@
                 }, 1000);
                 uno ++ 
             }else{
-                arreglo_botom[i].style.backgroundColor = "red"
+                botones[i].style.boxShadow = '0 0 10px red'
                 setTimeout(() => {
                     cambiar_color()
-                    juego_perdido()
-                    mostrar()
+                    pregunta_aleatoria()
+                    error()
                 }, 1000);
             }
         }
 
         function cambiar_color(){
-            arreglo_botom.forEach((botom) => {
-                botom.style.backgroundColor = "#fff"
+
+            botones.forEach(botom => {
+                botom.style.boxShadow = '0 0 10px #fff'
             })
         }
 
-        function ganador(){
-            alert("!felicidades¡ has ganado el juego , tienes un conocimiento basico sobre la programacion")
+        function error(){     
+            alert(`lo siento perdiste :) , actualiza la pagina para jugar de nuevo`)
         }
 
-        function juego_perdido(){
-            alert("!upss¡ , has perdido el juego :( , actualiza la pagina para jugar de nuevo")
+        function ganador(){
+                alert(`felicidades has ganado el test de pregunta y tienes un conocimiento basico sobre la programacion`)
+                punto = 0
+                puntos.textContent = 0          
         }
-        
+
