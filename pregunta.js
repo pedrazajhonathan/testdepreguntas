@@ -190,105 +190,99 @@
                 respuesta_incorrecta2 : "else if",
                 respuesta_incorrecta3 : "Number",
             }, 
+            {
+                pregunta : "cual es el resultado de esta operacion console.log(5 > 4)",
+                respuesta : "true",
+                respuesta_incorrecta1 : "false",
+                respuesta_incorrecta2 : "9",
+                respuesta_incorrecta3 : "error",
+            }, 
+            {
+                pregunta : "cuales son los operadores de comparacion",
+                respuesta : "== , < , > , >= , <= , !=",
+                respuesta_incorrecta1 : "|| , && , !",
+                respuesta_incorrecta2 : "true o false",
+                respuesta_incorrecta3 : "+= , -=",
+            }, 
         ] 
 
-        let arreglo = [preguntas_bajo , preguntas_medio , preguntas_alto]
-
-        let pregunta_completa
-
+        let pregunta_elejida
+        let arreglo_de_preguntas = [preguntas_bajo , preguntas_medio , preguntas_alto]
+        
         function elejir(i){
-            pregunta_completa = arreglo[i]
+            pregunta_elejida = arreglo_de_preguntas[i]
             let container = document.getElementById("container")
             container.classList.add("listo")
-            pregunta_aleatoria()
+            responder_pregunta()
         }
 
-        let pregunta = document.getElementById("pregunta")
         let botom1 = document.getElementById("botom1")
         let botom2 = document.getElementById("botom2")
         let botom3 = document.getElementById("botom3")
         let botom4 = document.getElementById("botom4")
-        let pregunta_lista
-        let cambiar_pregunta
-        let puntos = document.getElementById("punto")
-        let punto = 0
+        let pregunta = document.getElementById("pregunta")
+        let uno = 0
+        let punto = document.getElementById("punto")
+        let respuestas_listas
+        let pregunta_total
 
-        let nombre_jugador = prompt("primero que todo coloce su nombre , si llegas a 10 puntos ganas el test de programacion basica")
+        function responder_pregunta(){
+            let ramdon = Math.floor(Math.random() * pregunta_elejida.length)
+            pregunta_total = pregunta_elejida[ramdon]
 
-        function pregunta_aleatoria(){
-            let random = Math.floor(Math.random() * pregunta_completa.length)
-            pregunta_lista = pregunta_completa[random]
+            pregunta.textContent = pregunta_total.pregunta
 
-            if(nombre_jugador){
-                pregunta.textContent = `oye ${nombre_jugador} ${pregunta_lista.pregunta}`
-            }else{
-                pregunta.textContent = `oye fulano sin nombre ${pregunta_lista.pregunta}`
-            }
-
-            let arreglo_pregunta = [
-                pregunta_lista.respuesta,
-                pregunta_lista.respuesta_incorrecta1,
-                pregunta_lista.respuesta_incorrecta2,
-                pregunta_lista.respuesta_incorrecta3
+            let arreglo_de_respuestas = [
+                pregunta_total.respuesta,
+                pregunta_total.respuesta_incorrecta1,
+                pregunta_total.respuesta_incorrecta2,
+                pregunta_total.respuesta_incorrecta3, 
             ]
 
-            cambiar_pregunta = arreglo_pregunta.sort(()=>Math.random()- 0.5)
+            respuestas_listas = arreglo_de_respuestas.sort(() => Math.random() - 0.5)
 
-            botom1.textContent = cambiar_pregunta[0]
-            botom2.textContent = cambiar_pregunta[1]
-            botom3.textContent = cambiar_pregunta[2]
-            botom4.textContent = cambiar_pregunta[3]
+            botom1.textContent = respuestas_listas[0]
+            botom2.textContent = respuestas_listas[1]
+            botom3.textContent = respuestas_listas[2]
+            botom4.textContent = respuestas_listas[3]
 
-            puntos.textContent = punto
-            
+            punto.textContent = uno
         }
-     
 
-        let botones = [botom1,botom2,botom3,botom4]
+        let arreglo_botom = [botom1,botom2,botom3,botom4]
 
         function mostrar(i){
-            if(cambiar_pregunta[i] == pregunta_lista.respuesta){
-                botones[i].style.backgroundColor = "green"
+            if(respuestas_listas[i] == pregunta_total.respuesta){
+                arreglo_botom[i].style.backgroundColor = "green"
                 setTimeout(() => {
-                    pregunta_aleatoria()
+                    responder_pregunta()
                     cambiar_color()
-                    if(punto == 10){
+                    if(punto.textContent == 10){
                         ganador()
                     }
                 }, 1000);
-                punto ++
+                uno ++ 
             }else{
-                botones[i].style.backgroundColor = "red"
+                arreglo_botom[i].style.backgroundColor = "red"
                 setTimeout(() => {
                     cambiar_color()
-                    error()
+                    juego_perdido()
+                    mostrar()
                 }, 1000);
             }
         }
-        
+
         function cambiar_color(){
-            botones.forEach(botom => {
+            arreglo_botom.forEach((botom) => {
                 botom.style.backgroundColor = "#fff"
             })
         }
 
-        function error(){
-            if(nombre_jugador){
-                alert(`${nombre_jugador} perdiste :) , actualiza la pagina para jugar de nuevo`)
-
-            }else{
-                alert(`fulano sin nombre perdiste :) , actualiza la pagina para jugar de nuevo`)
-            }
-        }
-
         function ganador(){
-            if(nombre_jugador){
-                alert(`${nombre_jugador} has ganado el test de pregunta y tienes un conocimiento basico sobre la programacion`)
-                punto = 0
-                puntos.textContent = 0
-            }else{
-                alert(`fulano has ganado el test de preguntas y tienes un conocimiento basico sobre la programacion`)
-                punto = 0
-                puntos.textContent = punto
-            }
+            alert("!felicidades¡ has ganado el juego , tienes un conocimiento basico sobre la programacion")
         }
+
+        function juego_perdido(){
+            alert("!upss¡ , has perdido el juego :( , actualiza la pagina para jugar de nuevo")
+        }
+        
