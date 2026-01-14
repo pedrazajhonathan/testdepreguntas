@@ -231,8 +231,6 @@
             let ramdon = Math.floor(Math.random() * pregunta_elejida.length)
             pregunta_total = pregunta_elejida[ramdon]
 
-            pregunta.textContent = pregunta_total.pregunta
-
             let arreglo_de_respuestas = [
                 pregunta_total.respuesta,
                 pregunta_total.respuesta_incorrecta1,
@@ -240,16 +238,9 @@
                 pregunta_total.respuesta_incorrecta3, 
 
             ]
-            pregunta.textContent = `oye ${pregunta_lista.pregunta}`
-           
-
-            let arreglo_pregunta = [
-                pregunta_lista.respuesta,
-                pregunta_lista.respuesta_incorrecta1,
-                pregunta_lista.respuesta_incorrecta2,
-                pregunta_lista.respuesta_incorrecta3
-
-            ]
+            pregunta.classList.remove("incorrecto")
+            pregunta.classList.remove("correcto")
+            pregunta.textContent = `${pregunta_total.pregunta}`
 
             respuestas_listas = arreglo_de_respuestas.sort(() => Math.random() - 0.5)
 
@@ -264,41 +255,47 @@
         let arreglo_botom = [botom1,botom2,botom3,botom4]
 
         function mostrar(i){
-            if(cambiar_pregunta[i] == pregunta_lista.respuesta){
-                botones[i].style.boxShadow = '0 0 10px green'
-
+            if(respuestas_listas[i] == pregunta_total.respuesta){
+                arreglo_botom[i].classList.add("verde")
+                pregunta.textContent = "respuesta correcta"
+                pregunta.classList.add("correcto")
                 setTimeout(() => {
                     responder_pregunta()
                     cambiar_color()
-                    if(punto.textContent == 10){
+                    if(uno == 10){
                         ganador()
                     }
-                }, 1000);
+                }, 1500);
                 uno ++ 
             }else{
-                botones[i].style.boxShadow = '0 0 10px red'
+                arreglo_botom[i].classList.add("rojo")
+                pregunta.textContent = "respuesta incorrecta"
+                pregunta.classList.add("incorrecto")
                 setTimeout(() => {
                     cambiar_color()
-                    pregunta_aleatoria()
+
+                    responder_pregunta()
                     error()
-                }, 1000);
+                }, 1500);
             }
         }
 
         function cambiar_color(){
-
-            botones.forEach(botom => {
-                botom.style.boxShadow = '0 0 10px #fff'
+            arreglo_botom.forEach(botom => {
+                botom.classList.remove("rojo")
+                botom.classList.remove("verde")
             })
         }
 
         function error(){     
             alert(`lo siento perdiste :) , actualiza la pagina para jugar de nuevo`)
+            uno = 0
+            punto.textContent = 0          
         }
 
         function ganador(){
-                alert(`felicidades has ganado el test de pregunta y tienes un conocimiento basico sobre la programacion`)
-                punto = 0
-                puntos.textContent = 0          
+            alert(`felicidades has ganado el test de pregunta y tienes un conocimiento basico sobre la programacion`)
+            uno = 0
+            punto.textContent = 0          
         }
 
