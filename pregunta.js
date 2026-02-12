@@ -273,7 +273,6 @@
                 pregunta.classList.add("incorrecto")
                 setTimeout(() => {
                     cambiar_color()
-
                     responder_pregunta()
                     error()
                 }, 1500);
@@ -299,3 +298,25 @@
             punto.textContent = 0          
         }
 
+
+        // efecto maquina de la presentacion
+
+        let bienvenida = document.getElementById("bienvenida")
+        let texto = "desarrollado por jhonathan pedraza"
+        let speed = 100
+        let i = 0
+
+        setInterval(() => {
+            if(i< texto.length){
+                bienvenida.textContent += texto.charAt(i)
+                i++
+            }
+        }, speed);
+
+
+        // algoritmo para eliminar la seccion1
+
+        setTimeout(() => {
+            let seccion1 = document.getElementById("seccion1")
+            seccion1.classList.add("borrar")
+        }, 5000);
